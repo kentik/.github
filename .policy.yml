@@ -1,0 +1,24 @@
+policy:
+  approval:
+    - or:
+        - the engineering team has approved
+        - only docs files have changed
+  disapproval:
+    requires:
+      organizations:
+        - "kentik"
+
+approval_rules:
+  - name: the engineering team has approved
+    requires:
+      count: 1
+      teams:
+        - "kentik/eng"
+
+  - name: only docs files have changed
+    if:
+      only_changed_files:
+        paths:
+          - "docs/.*"
+    requires:
+      count: 0
