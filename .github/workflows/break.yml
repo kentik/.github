@@ -22,4 +22,5 @@ jobs:
         go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.61.0
         golangci-lint --version
         echo "Running linter"
+        cd test/1
         golangci-lint run
