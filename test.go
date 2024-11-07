@@ -1,6 +1,7 @@
 package main
 
+import "os"
+
 func main() {
-	A := 1
-	_ = A
+	os.Chdir("//ssss")
 }
