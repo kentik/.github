@@ -2,7 +2,7 @@ module a
 
 go 1.22.1
 
-toolchain go1.23.2
+//toolchain go1.23.2
 
 require github.com/grpc-ecosystem/grpc-gateway/v2 v2.23.0
 
