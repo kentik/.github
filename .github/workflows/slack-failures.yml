@@ -1,0 +1,24 @@
+name: Notify Slack on failed workflows
+
+on:
+  workflow_run:
+    workflows: [ "*" ]                     # watch ALL workflows in the org
+    types: [ completed ]
+
+jobs:
+  notify_if_failed:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+
+    steps:
+      - name: Send failure to Slack
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notify_when: "failure"
+          notification_title: "❌ Workflow failed: {workflow}"
+          message_format: |
+            🚨 *Workflow failed in {repo}* ({branch})
+            <{workflow_url}|View run>
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.KENITK_GITHUB_ACTIONS_SLACK_TOKEN }}
